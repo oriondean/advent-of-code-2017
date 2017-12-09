@@ -10,7 +10,7 @@ const SPECIAL_CHARACTERS = {
 module.exports = (input) => {
   let isInGarbage = false;
   let isEscaped = false;
-  let depth = '';
+  let depth = 0;
   let groupScore = 0;
   let garbageCount = 0;
 
@@ -21,8 +21,8 @@ module.exports = (input) => {
       else if (character === SPECIAL_CHARACTERS.GARBAGE_CLOSE && isInGarbage) isInGarbage = false;
       else if (character === SPECIAL_CHARACTERS.GARBAGE_OPEN && !isInGarbage) isInGarbage = true;
       else if (isInGarbage) garbageCount += 1;
-      else if (character === SPECIAL_CHARACTERS.GROUP_OPEN) groupScore += depth++;
-      else if (character === SPECIAL_CHARACTERS.GROUP_CLOSE) depth--;
+      else if (character === SPECIAL_CHARACTERS.GROUP_OPEN) depth++;
+      else if (character === SPECIAL_CHARACTERS.GROUP_CLOSE) groupScore += depth--;
     });
 
   return {
