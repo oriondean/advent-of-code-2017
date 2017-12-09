@@ -17,36 +17,13 @@ module.exports = (input) => {
 
   input.split('')
     .forEach((character) => {
-      if (isEscaped) {
-        isEscaped = false;
-        return;
-      }
-
-      if (character === SPECIAL_CHARACTERS.ESCAPE) {
-        isEscaped = true;
-        return;
-      }
-
-      if (character === SPECIAL_CHARACTERS.GARBAGE_CLOSE && isInGarbage) {
-        isInGarbage = false;
-        return;
-      }
-
-      if (character === SPECIAL_CHARACTERS.GARBAGE_OPEN && !isInGarbage) {
-        isInGarbage = true;
-        return;
-      }
-
-      if (isInGarbage) {
-        garbageCount += 1;
-        return;
-      }
-
-      if (character === SPECIAL_CHARACTERS.GROUP_OPEN) {
-        groupStack.push(character);
-      }
-
-      if (character === SPECIAL_CHARACTERS.GROUP_CLOSE) {
+      if (isEscaped) isEscaped = false;
+      else if (character === SPECIAL_CHARACTERS.ESCAPE) isEscaped = true;
+      else if (character === SPECIAL_CHARACTERS.GARBAGE_CLOSE && isInGarbage) isInGarbage = false;
+      else if (character === SPECIAL_CHARACTERS.GARBAGE_OPEN && !isInGarbage) isInGarbage = true;
+      else if (isInGarbage) garbageCount += 1;
+      else if (character === SPECIAL_CHARACTERS.GROUP_OPEN) groupStack.push(character);
+      else if (character === SPECIAL_CHARACTERS.GROUP_CLOSE) {
         groupScore += groupStack.length;
         groupStack.pop();
       }
