@@ -12,6 +12,7 @@
     "jest": "^21.2.1"
   },
   "scripts": {
+    "lint": "eslint days",
     "test": "jest",
     "test:watch": "jest --watch"
   },
