@@ -8,10 +8,9 @@ const SPECIAL_CHARACTERS = {
 };
 
 module.exports = (input) => {
-  const groupStack = [];
   let isInGarbage = false;
   let isEscaped = false;
-
+  let depth = '';
   let groupScore = 0;
   let garbageCount = 0;
 
@@ -22,11 +21,8 @@ module.exports = (input) => {
       else if (character === SPECIAL_CHARACTERS.GARBAGE_CLOSE && isInGarbage) isInGarbage = false;
       else if (character === SPECIAL_CHARACTERS.GARBAGE_OPEN && !isInGarbage) isInGarbage = true;
       else if (isInGarbage) garbageCount += 1;
-      else if (character === SPECIAL_CHARACTERS.GROUP_OPEN) groupStack.push(character);
-      else if (character === SPECIAL_CHARACTERS.GROUP_CLOSE) {
-        groupScore += groupStack.length;
-        groupStack.pop();
-      }
+      else if (character === SPECIAL_CHARACTERS.GROUP_OPEN) groupScore += depth++;
+      else if (character === SPECIAL_CHARACTERS.GROUP_CLOSE) depth--;
     });
 
   return {
