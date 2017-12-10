@@ -5,6 +5,7 @@ module.exports = {
     "jest": true
   },
   "rules": {
-    "no-plusplus": "off"
+    "no-plusplus": "off",
+    "no-bitwise": "off"
   }
 };
