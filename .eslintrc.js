@@ -6,6 +6,7 @@ module.exports = {
   },
   "rules": {
     "no-plusplus": "off",
-    "no-bitwise": "off"
+    "no-bitwise": "off",
+    "no-console": "off"
   }
 };
