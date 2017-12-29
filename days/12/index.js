@@ -15,7 +15,7 @@ const visit = (id, group, map) => map[id]
   .forEach((pipe) => {
     if (group.find(existingPipe => pipe === existingPipe) === undefined && pipe !== id) {
       group.push(pipe);
-      visit(pipe, group);
+      visit(pipe, group, map);
     }
   });
 
