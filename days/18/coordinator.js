@@ -3,8 +3,7 @@ module.exports = class Coordinator {
     this.programs = [program0, program1];
 
     this.activeProgramIndex = 0;
-    this.activeProgram = this.programs[0];
-    this.inactiveProgram = this.programs[1];
+    [this.activeProgram, this.inactiveProgram] = this.programs;
   }
 
   execute(instructions) {
