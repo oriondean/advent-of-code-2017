@@ -51,7 +51,7 @@ fs.readFile('./input.txt', 'utf-8', (err, data) => {
       }
 
       return image;
-    }, expand('.#./..#/###)'));
+    }, expand('.#./..#/###'));
 
   const hashCount = output.reduce((memo, row) => memo + row.filter(char => char === '#').length, 0);
   console.log(hashCount);
