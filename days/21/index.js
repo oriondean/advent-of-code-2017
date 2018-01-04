@@ -1,34 +1,9 @@
 const fs = require('fs');
 const isMatch = require('./matcher');
+const slice = require('./slicer');
+const combine = require('./combiner');
 
 const expand = string => string.split('/').map(row => row.split(''));
-
-const partition = (image, x, y, size) => {
-  const pieces = [...Array(size).keys()];
-  return pieces.map(row => pieces.map(col => image[row + x][col + y]));
-};
-
-const slice = (image, size) => {
-  const pieces = image.length / size;
-
-  return [...Array(pieces ** 2).keys()]
-    .map(i => partition(image, Math.floor(i / pieces) * size, (i % pieces) * size, size));
-};
-
-const combine = (images, perRow) => {
-  if (images.length === 1) {
-    return images[0];
-  }
-
-  const newSize = images[0].length;
-
-  return [...Array(newSize * perRow).keys()].map((index) => {
-    const x = Math.floor(index / newSize) * perRow;
-    const y = index % newSize;
-
-    return [...Array(perRow).keys()].reduce((memo, i) => memo.concat(images[x + i][y]), []);
-  });
-};
 
 const iterations = 18;
 
